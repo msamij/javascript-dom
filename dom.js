@@ -361,3 +361,352 @@ btn.addEventListener("click", function(event) {
   console.log(event.target); // which element was clicked
 });
  */
+
+/**
+ * Event bubbling means when an event occurs on an element, it first runs the handler on that element, then on its parent, then on its grandparent… all the way up the DOM tree.
+
+It "bubbles" up from the target element to the root.
+
+📌 Event Bubbling Example
+HTML
+
+html
+Copy
+Edit
+<div id="outer">
+  <div id="inner">
+    <button id="btn">Click Me</button>
+  </div>
+</div>
+JavaScript
+
+javascript
+Copy
+Edit
+let outer = document.getElementById("outer");
+let inner = document.getElementById("inner");
+let btn = document.getElementById("btn");
+
+outer.addEventListener("click", function() {
+  console.log("Outer Div Clicked");
+});
+
+inner.addEventListener("click", function() {
+  console.log("Inner Div Clicked");
+});
+
+btn.addEventListener("click", function() {
+  console.log("Button Clicked");
+});
+✅ What happens if you click the button?
+Button Clicked
+
+Inner Div Clicked
+
+Outer Div Clicked
+
+Because the event bubbles up through the parent elements.
+
+📌 What is Event Delegation?
+Event delegation is a pattern where instead of adding an event listener to each individual element, you attach a single event listener to a common parent, and use the event.target property to figure out which child element was actually clicked.
+
+It works because of event bubbling.
+
+📌 Event Delegation Example
+HTML
+
+html
+Copy
+Edit
+<ul id="fruitList">
+  <li>Apple</li>
+  <li>Banana</li>
+  <li>Mango</li>
+</ul>
+JavaScript
+
+javascript
+Copy
+Edit
+let list = document.getElementById("fruitList");
+
+list.addEventListener("click", function(event) {
+  if (event.target.tagName === "LI") {
+    alert("You clicked on " + event.target.textContent);
+  }
+});
+✅ What happens?
+Click on any li — the parent ul catches the event because of bubbling.
+
+It checks if the target is an LI.
+
+If yes, it runs the alert.
+
+📌 Why Use Event Delegation?
+Cleaner code: one listener for many elements
+
+Works for dynamically added elements too (added after page load)
+
+Efficient in terms of memory & performance
+
+📌 Bonus: Stop Bubbling
+If you want to stop an event from bubbling up:
+
+javascript
+Copy
+Edit
+btn.addEventListener("click", function(event) {
+  event.stopPropagation();
+  console.log("Button Clicked (no bubbling)");
+});
+📚 Student Exercises
+✏️ 1. Event Bubbling Trace
+Create nested divs and a button inside. Attach click listeners to each and console.log which one was clicked. Observe bubbling order.
+
+✏️ 2. Event Delegation Click List
+Make a ul with multiple li items. Use event delegation to alert the text of any item you click.
+
+✏️ 3. Dynamic Item Click
+Allow students to dynamically add li items via a button, and still have the event delegation working on those new items.
+ */
+
+// <!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8">
+//   <title>Simple Todo App</title>
+//   <link rel="stylesheet" href="style.css">
+// </head>
+// <body>
+
+//   <div class="app">
+//     <h1>📝 To-Do List</h1>
+//     <input type="text" id="todoInput" placeholder="Enter a new task">
+//     <button id="addBtn">Add</button>
+//     <ul id="todoList"></ul>
+//   </div>
+
+//   <script src="script.js"></script>
+// </body>
+// </html>
+
+/*
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+.app {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 70%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 9px 15px;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li button {
+  background: #e74c3c;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+li button:hover {
+  background: #c0392b;
+}
+  
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+
+*/
+
+/**
+ * let addBtn = document.getElementById("addBtn");
+let todoInput = document.getElementById("todoInput");
+let todoList = document.getElementById("todoList");
+
+addBtn.addEventListener("click", function() {
+  let task = todoInput.value.trim();
+
+  if (task === "") {
+    alert("Please enter a task.");
+    return;
+  }
+
+  // Create new list item
+  let li = document.createElement("li");
+  li.textContent = task;
+
+  // Create delete button
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+
+  // Add delete functionality
+  deleteBtn.addEventListener("click", function() {
+    li.remove();
+  });
+
+  // Add button to list item and list item to list
+  li.appendChild(deleteBtn);
+  todoList.appendChild(li);
+
+  // Clear input
+  todoInput.value = "";
+});
+
+
+
+
+
+
+
+// New
+
+let addBtn = document.getElementById("addBtn");
+let todoInput = document.getElementById("todoInput");
+let todoList = document.getElementById("todoList");
+
+// Load tasks from localStorage on page load
+window.addEventListener("load", loadTasks);
+
+addBtn.addEventListener("click", addTask);
+
+// Add task with Enter key
+todoInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
+});
+
+function addTask() {
+  let task = todoInput.value.trim();
+  if (task === "") {
+    alert("Please enter a task.");
+    return;
+  }
+
+  createTaskElement(task);
+  saveTask(task);
+  todoInput.value = "";
+}
+
+function createTaskElement(taskText, completed = false) {
+  let li = document.createElement("li");
+
+  // Checkbox
+  let checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = completed;
+
+  if (completed) {
+    li.classList.add("completed");
+  }
+
+  // On checking checkbox
+  checkbox.addEventListener("change", function() {
+    li.classList.toggle("completed");
+    updateTaskStatus();
+  });
+
+  // Task text
+  let span = document.createElement("span");
+  span.textContent = taskText;
+
+  // Delete button
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.addEventListener("click", function() {
+    li.remove();
+    deleteTask(taskText);
+  });
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+  li.appendChild(deleteBtn);
+  todoList.appendChild(li);
+}
+
+function saveTask(taskText) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push({ text: taskText, completed: false });
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function deleteTask(taskText) {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks = tasks.filter(task => task.text !== taskText);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function updateTaskStatus() {
+  let liItems = document.querySelectorAll("#todoList li");
+  let tasks = [];
+
+  liItems.forEach(item => {
+    let text = item.querySelector("span").textContent;
+    let isChecked = item.querySelector("input[type='checkbox']").checked;
+    tasks.push({ text: text, completed: isChecked });
+  });
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach(task => {
+    createTaskElement(task.text, task.completed);
+  });
+}
+
+
+ */
