@@ -710,3 +710,132 @@ function loadTasks() {
 
 
  */
+
+/**
+ * Revision.
+ *
+ * String methods.
+ * | Method             | Purpose                                                   | Example                                                   |
+|:------------------|:----------------------------------------------------------|:-------------------------------------------------------------|
+| `length`            | Returns the length of a string                            | `"Hello".length // 5`                                       |
+| `toUpperCase()`     | Converts to uppercase                                     | `"hello".toUpperCase() // "HELLO"`                          |
+| `toLowerCase()`     | Converts to lowercase                                     | `"HELLO".toLowerCase() // "hello"`                          |
+| `includes(substring)` | Checks if string contains substring                     | `"Hello".includes("He") // true`                            |
+| `indexOf(substring)` | Returns index of first occurrence, or -1 if not found    | `"Hello".indexOf("l") // 2`                                 |
+| `lastIndexOf(substring)` | Index of last occurrence                             | `"Hello".lastIndexOf("l") // 3`                             |
+| `slice(start, end)` | Extracts part of a string                                 | `"Hello".slice(1,4) // "ell"`                               |
+| `substring(start, end)` | Similar to `slice()`                                   | `"Hello".substring(1,4) // "ell"`                          |
+| `charAt(index)`     | Returns character at given index                          | `"Hello".charAt(1) // "e"`                                  |
+| `trim()`            | Removes whitespace from both ends                         | `"  Hello  ".trim() // "Hello"`                             |
+| `replace(old, new)` | Replaces first occurrence of `old` with `new`             | `"Hello".replace("H", "J") // "Jello"`                      |
+| `split(separator)`  | Splits string into array of substrings                    | `"a,b,c".split(",") // ["a","b","c"]`                       |
+| `concat()`          | Combines strings                                          | `"Hello".concat(" World") // "Hello World"`                 |
+
+* Array methods.
+
+| Method             | Purpose                                                   | Example                                                        |
+|:------------------|:----------------------------------------------------------|:-------------------------------------------------------------|
+| `length`            | Number of elements in array                               | `[1,2,3].length // 3`                                         |
+| `push(item)`        | Adds item to end                                          | `[1,2].push(3) // [1,2,3]`                                    |
+| `pop()`             | Removes last item                                         | `[1,2,3].pop() // returns 3, array is now [1,2]`              |
+| `unshift(item)`     | Adds item at start                                        | `[2,3].unshift(1) // [1,2,3]`                                 |
+| `shift()`           | Removes first item                                        | `[1,2,3].shift() // returns 1, array is now [2,3]`            |
+| `indexOf(item)`     | Returns index of item or -1 if not found                  | `[1,2,3].indexOf(2) // 1`                                     |
+| `includes(item)`    | Checks if array contains item                             | `[1,2,3].includes(2) // true`                                 |
+| `slice(start, end)` | Returns a new array from start to (end-1)                 | `[1,2,3,4].slice(1,3) // [2,3]`                               |
+| `splice(start, deleteCount, item1, item2,...)` | Adds/removes items at specific index | `arr.splice(1,0,"x")` inserts "x" at index 1            |
+| `forEach(callback)` | Runs a function for each item (no return)                 | `[1,2,3].forEach(x => console.log(x))`                        |
+| `map(callback)`     | Creates a new array by applying a function to each item   | `[1,2,3].map(x => x*2) // [2,4,6]`                            |
+| `filter(callback)`  | Returns a new array with items passing the test function  | `[1,2,3].filter(x => x>1) // [2,3]`                           |
+| `find(callback)`    | Returns first item matching condition                     | `[1,2,3].find(x => x>1) // 2`                                 |
+| `reduce(callback, initial value)`    |  Reduce array to a single value          | `[1,2,3].find((acc,curr) => acc+curr) // 6`                   |
+| `findIndex(callback)` | Index of first matching item                            | `[1,2,3].findIndex(x => x>1) // 1`                            |
+| `join(separator)`   | Joins array items into a string                           | `["a","b"].join("-") // "a-b"`                                |
+| `concat()`          | Combines two arrays                                       | `[1,2].concat([3,4]) // [1,2,3,4]`                            |
+| `reverse()`         | Reverses array in place                                   | `[1,2,3].reverse() // [3,2,1]`                                |
+| `sort()`            | Sorts array as strings                                    | `[3,1,2].sort() // [1,2,3]` *(caution with numbers!)*         |
+| `every(callback)`   | Checks if every item passes condition                     | `[1,2,3].every(x => x>0) // true`                             |
+| `some(callback)`    | Checks if at least one item passes condition              | `[1,2,3].some(x => x>2) // true`                              |
+
+* Exercises
+    Strings:
+    Get the length of the string "JavaScript"
+
+    Convert "hello world" to uppercase.
+
+    Find the position of "o" in "Hello World".
+
+    Replace "World" with "Everyone" in "Hello World".
+
+    Split "React,Vue,Angular" into an array.
+
+    Arrays:
+    Create an array of fruits and add "Mango" at the end.
+
+    Remove the first fruit from the array.
+
+    Check if "Apple" is in the array.
+
+    Use map to multiply all numbers in [2,4,6] by 2.
+
+    Use filter to get numbers greater than 3 in [1,2,3,4,5].
+
+*/
+
+/**
+ * Reduce function 
+ * Callback parameters:
+    accumulator → result so far
+
+    currentValue → current item being processed
+
+    index (optional)
+
+    array (optional)
+    
+    Example 1 Sum elements of an array:
+      let numbers = [1, 2, 3, 4];
+      let total = numbers.reduce(function(acc, curr) {
+        return acc + curr;
+      }, 0);
+
+      console.log(total);  // 10
+
+      Explanation:
+        acc starts at 0
+        Adds each curr to it
+
+    Example 2: Find maximum number
+      let numbers = [5, 9, 1, 7];
+      let max = numbers.reduce((acc, curr) => {
+        return curr > acc ? curr : acc;
+      }, numbers[0]);
+
+      console.log(max);  // 9
+      
+      
+  * Splice method — Add, Remove, or Replace elements in an array
+    array.splice(start, deleteCount, item1, item2, ...)
+    
+  | Parameter     | What it does                                  |
+  |:--------------|:----------------------------------------------|
+  | `start`        | The index at which to start changing the array |
+  | `deleteCount`  | Number of elements to remove                   |
+  | `item1, item2` | Optional elements to add starting at `start`   |
+  
+  
+  Example:
+    let fruits = ["Apple", "Banana", "Mango", "Orange"];
+
+    // 1️⃣ Remove 1 item at index 2
+    fruits.splice(2, 1);
+    console.log(fruits);  // ["Apple", "Banana", "Orange"]
+
+    // 2️⃣ Add "Grapes" at index 1 without deleting anything
+    fruits.splice(1, 0, "Grapes");
+    console.log(fruits);  // ["Apple", "Grapes", "Banana", "Orange"]
+
+    // 3️⃣ Replace 1 item at index 2 with "Peach"
+    fruits.splice(2, 1, "Peach");
+    console.log(fruits);  // ["Apple", "Grapes", "Peach", "Orange"]
+ */
