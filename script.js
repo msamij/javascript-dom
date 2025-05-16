@@ -44,12 +44,72 @@ printAge();
 
 ///////////////////////////////////////
 // Hoisting and TDZ in Practice
-/*
+
 // Variables
-console.log(me);
+// console.log(me);
 // console.log(job);
 // console.log(year);
 
+/*
+
+Primitives are immutable, simple data types — their values are directly stored and compared by value.
+
+Types of Primitives:
+
+string → e.g. 'hello'
+
+number → e.g. 42, 3.14
+
+bigint → e.g. 1234567890123456789012345678901234567890n
+
+boolean → true, false
+
+undefined
+
+null
+
+symbol
+
+
+Objects
+Objects are collections of properties (key-value pairs). They include:
+
+plain objects { key: value }
+
+arrays []
+
+functions function() {} (functions are objects too)
+
+dates new Date()
+
+almost everything else that's not a primitive.
+
+ Key characteristics:
+
+Mutable (their contents can be changed)
+
+Compared by reference
+
+Stored as a reference to memory location
+
+
+
+| Type        | Example     | Is it Truthy? | Type?     |
+| ----------- | ----------- | ------------- | --------- |
+| `false`     | `false`     | Falsy         | Primitive |
+| `0`         | `0`         | Falsy         | Primitive |
+| `""`        | `""`        | Falsy         | Primitive |
+| `null`      | `null`      | Falsy         | Primitive |
+| `undefined` | `undefined` | Falsy         | Primitive |
+| `NaN`       | `NaN`       | Falsy         | Primitive |
+| `{}`        | `{}`        | Truthy        | Object    |
+| `[]`        | `[]`        | Truthy        | Object    |
+| `"text"`    | `"text"`    | Truthy        | Primitive |
+| `42`        | `42`        | Truthy        | Primitive |
+
+
+*/
+/*
 var me = 'Jonas';
 let job = 'teacher';
 const year = 1991;
@@ -57,7 +117,7 @@ const year = 1991;
 // Functions
 console.log(addDecl(2, 3));
 // console.log(addExpr(2, 3));
-console.log(addArrow);
+// console.log(addArrow);
 // console.log(addArrow(2, 3));
 
 function addDecl(a, b) {
@@ -84,12 +144,11 @@ var x = 1;
 let sami = 'sami';
 let y = 2;
 const z = 3;
-
-console.log(window.sami);
-console.log(x === window.x);
-console.log(y === window.y);
-console.log(z === window.z);
 */
+// console.log(window.sami);
+// console.log(x === window.x);
+// console.log(y === window.y);
+// console.log(z === window.z);
 
 ///////////////////////////////////////
 // The this Keyword in Practice
