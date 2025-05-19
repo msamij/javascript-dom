@@ -70,7 +70,6 @@ null
 
 symbol
 
-
 Objects
 Objects are collections of properties (key-value pairs). They include:
 
