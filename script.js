@@ -289,67 +289,57 @@ const z = 3;
 // console.log('Original:', jessica);
 // console.log('Clone:', jessicaClone);
 
-//////// Object literals and enhanced object literals
-const name = 'Bob';
-const age = 30;
+// const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+// const openingHours = {
+//   [weekdays[3]]: {
+//     open: 12,
+//     close: 22,
+//   },
+//   [weekdays[4]]: {
+//     open: 11,
+//     close: 23,
+//   },
+//   [weekdays[5]]: {
+//     open: 0, // Open 24 hours
+//     close: 24,
+//   },
+// };
 
-const user = { name, age };
+// const restaurant = {
+//   name: 'Classico Italiano',
+//   location: 'Via Angelo Tavanti 23, Firenze, Italy',
+//   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+//   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+//   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-const openingHours = {
-  // Computed property names
-  [weekdays[3]]: {
-    open: 12,
-    close: 22,
-  },
-  [weekdays[4]]: {
-    open: 11,
-    close: 23,
-  },
-  [weekdays[5]]: {
-    open: 0, // Open 24 hours
-    close: 24,
-  },
-};
+//   // ES6 enhanced object literals
+//   openingHours,
 
-console.log(openingHours);
+//   order(starterIndex, mainIndex) {
+//     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+//   },
 
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+//   orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
+//     console.log(
+//       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+//     );
+//   },
 
-  // ES6 enhanced object literals
-  openingHours,
+//   orderPasta(ing1, ing2, ing3) {
+//     console.log(
+//       `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
+//     );
+//   },
 
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
-
-  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
-    console.log(
-      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-    );
-  },
-
-  orderPasta(ing1, ing2, ing3) {
-    console.log(`Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`);
-  },
-
-  orderPizza(mainIngredient, ...otherIngredients) {
-    console.log(mainIngredient);
-    console.log(otherIngredients);
-  },
-};
-
-restaurant.orderDelivery({ starterIndex: 0, mainIndex: 2, time: '15:00', address: 'near dollmen' });
-restaurant.orderPizza('mozerella cheese', 'flour', 'yeast', 'garlic', 'Olives');
+//   orderPizza(mainIngredient, ...otherIngredients) {
+//     console.log(mainIngredient);
+//     console.log(otherIngredients);
+//   },
+// };
 
 ///////////////////////////////////////
 // String Methods Practice
-
+/*
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
@@ -360,18 +350,34 @@ const flights =
 
 const getCode = str => str.slice(0, 3).toUpperCase();
 
-console.log(flights.split('+'));
-
 for (const flight of flights.split('+')) {
   const [type, from, to, time] = flight.split(';');
-  // console.log(from);
-  // console.log(time.replace(':', 'h'));
-
-  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll('_', ' ')} ${getCode(from)} ${getCode(
-    to
-  )} (${time.replace(':', 'h')})`.padStart(36);
+  const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+    '_',
+    ' '
+  )} ${getCode(from)} ${getCode(to)} (${time.replace(':', 'h')})`.padStart(36);
   console.log(output);
 }
+*/
+
+/*
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+document.querySelector('button').addEventListener('click', function () {
+  const text = document.querySelector('textarea').value;
+  const rows = text.split('\n');
+
+  for (const [i, row] of rows.entries()) {
+    const [first, second] = row.toLowerCase().trim().split('_');
+
+    const output = `${first}${second.replace(
+      second[0],
+      second[0].toUpperCase()
+    )}`;
+    console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
+  }
+});
 
 // Split and join
 console.log('a+very+nice+string'.split('+'));
@@ -403,13 +409,12 @@ console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
 
 const maskCreditCard = function (number) {
   const str = number + '';
-
   const last = str.slice(-4);
   return last.padStart(str.length, '*');
 };
 
 console.log(maskCreditCard(64637836));
-console.log(maskCreditCard(4337846386464734));
+console.log(maskCreditCard(43378463864647384));
 console.log(maskCreditCard('334859493847755774747'));
 
 // Repeat
@@ -422,3 +427,5 @@ const planesInLine = function (n) {
 planesInLine(5);
 planesInLine(3);
 planesInLine(12);
+
+*/
