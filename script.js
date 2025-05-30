@@ -559,16 +559,11 @@ console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
 // if (users.length > 0) console.log(users[0].name);
 // else console.log('user array empty');
 
-/*
 ///////////////////////////////////////
 // Default Parameters
 const bookings = [];
 
-const createBooking = function (
-  flightNum,
-  numPassengers = 1,
-  price = 199 * numPassengers
-) {
+const createBooking = function (flightNum, numPassengers = 1, price = 199 * numPassengers) {
   // ES5
   // numPassengers = numPassengers || 1;
   // price = price || 199;
@@ -588,7 +583,6 @@ createBooking('LH123', 2);
 createBooking('LH123', 5);
 
 createBooking('LH123', undefined, 1000);
-
 
 ///////////////////////////////////////
 // How Passing Arguments Works: Values vs. Reference
@@ -610,6 +604,7 @@ const checkIn = function (flightNum, passenger) {
 };
 
 // checkIn(flight, jonas);
+
 // console.log(flight);
 // console.log(jonas);
 
@@ -617,13 +612,12 @@ const checkIn = function (flightNum, passenger) {
 // const flightNum = flight;
 // const passenger = jonas;
 
-const newPassport = function (person) {
-  person.passport = Math.trunc(Math.random() * 100000000000);
-};
+// const newPassport = function (person) {
+//   person.passport = Math.trunc(Math.random() * 100000000000);
+// };
 
-newPassport(jonas);
-checkIn(flight, jonas);
-
+// newPassport(jonas);
+// checkIn(flight, jonas);
 
 ///////////////////////////////////////
 // Functions Accepting Callback Functions
@@ -654,7 +648,7 @@ const high5 = function () {
 document.body.addEventListener('click', high5);
 ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
-
+/*
 ///////////////////////////////////////
 // Functions Returning Functions
 const greet = function (greeting) {
@@ -673,7 +667,7 @@ greet('Hello')('Jonas');
 const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArr('Hi')('Jonas');
-
+*/
 
 ///////////////////////////////////////
 // The call and apply Methods
@@ -683,9 +677,7 @@ const lufthansa = {
   bookings: [],
   // book: function() {}
   book(flightNum, name) {
-    console.log(
-      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
-    );
+    console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
     this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
   },
 };
@@ -726,6 +718,7 @@ console.log(swiss);
 
 book.call(swiss, ...flightData);
 
+/*
 ///////////////////////////////////////
 // The bind Method
 // book.call(eurowings, 23, 'Sarah Williams');
