@@ -40,5 +40,16 @@ let fruits = ['mango', 'apple', 'bannana'];
 
 // splice returns the array containing the deleted elements.
 let newFruits = fruits.splice(1, 1, 'orange');
-console.log(newFruits);
-console.log(fruits);
+// console.log(newFruits);
+// console.log(fruits);
+
+let numbersList = [1, 2, 3, 4, 5];
+let everyNum = numbersList.every(function (cur) {
+  return cur >= 1;
+});
+console.log(everyNum);
+
+let someNum = numbersList.some(function (cur) {
+  return cur >= 5;
+});
+console.log(everyNum);

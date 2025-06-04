@@ -28,7 +28,6 @@ const renderError = function (msg) {
 const getJSON = function (url, errorMsg = 'Something went wrong') {
   return fetch(url).then(response => {
     if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
-
     return response.json();
   });
 };
@@ -102,24 +101,39 @@ const getJSON = function (url, errorMsg = 'Something went wrong') {
 // getCountryAndNeighbour('portugal');
 // getCountryAndNeighbour('usa');
 
-setTimeout(() => {
-  console.log('1 second passed');
-  setTimeout(() => {
-    console.log('2 seconds passed');
-    setTimeout(() => {
-      console.log('3 second passed');
-      setTimeout(() => {
-        console.log('4 second passed');
-      }, 1000);
-    }, 1000);
-  }, 1000);
-}, 1000);
+// setTimeout(() => {
+//   console.log('1 second passed');
+//   setTimeout(() => {
+//     console.log('2 seconds passed');
+//     setTimeout(() => {
+//       console.log('3 second passed');
+//       setTimeout(() => {
+//         console.log('4 second passed');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
 
 ///////////////////////////////////////
 // Consuming Promises
 // Chaining Promises
 // Handling Rejected Promises
 // Throwing Errors Manually
+
+///////////////////////////////////////
+// Building a Simple Promise
+// const lotteryPromise = new Promise(function (resolve, reject) {
+//   console.log('Lotter draw is happening 🔮');
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       resolve('You WIN 💰');
+//     } else {
+//       reject(new Error('You lost your money 💩'));
+//     }
+//   }, 2000);
+// });
+
+// lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
 
 // const getCountryData = function (country) {
 //   fetch(`https://restcountries.com/v2/name/${country}`)
@@ -134,33 +148,98 @@ setTimeout(() => {
 // };
 // getCountryData('pakistan');
 
-const getCountryData = function (country) {
-  // Country 1
-  fetch(`https://restcountries.com/v2/name/${country}`)
-    .then(response => {
-      if (!response.ok) throw new Error(`Country not found (${response.status})`);
-      return response.json();
-    })
-    .then(data => {
-      renderCountry(data[0]);
-      return fetch(`https://restcountries.com/v2/name/usa`);
-    })
-    .then(response => {
-      if (!response.ok) throw new Error(`Country not found (${response.status})`);
-      return response.json();
-    })
-    .then(data => {
-      renderCountry(data[0]);
-    })
-    .catch(err => {
-      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
+// const getCountryData = function (country) {
+//   // Country 1
+//   fetch(`https://restcountries.com/v2/name/${country}`)
+//     .then(response => {
+//       if (!response.ok) throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//       return fetch(`https://restcountries.com/v2/name/usa`);
+//     })
+//     .then(response => {
+//       if (!response.ok) throw new Error(`Country not found (${response.status})`);
+//       return response.json();
+//     })
+//     .then(data => {
+//       renderCountry(data[0]);
+//     })
+//     .catch(err => {
+//       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
+//     })
+//     .finally(() => {
+//       countriesContainer.style.opacity = 1;
+//     });
+// };
 
-getCountryData('pakistan');
+// getCountryData('pakistan');
+
+// const promiseExample = function () {
+//   return new Promise(resolve => {
+//     setTimeout(resolve, 1000);
+//   });
+// };
+
+// promiseExample()
+//   .then(() => {
+//     console.log('promise completed!');
+//     return promiseExample();
+//   })
+//   .then(() => {
+//     console.log('promise completed!');
+//     return promiseExample();
+//   })
+//   .then(() => {
+//     console.log('promise completed!');
+//     return promiseExample();
+//   })
+//   .catch(() => console.log('promise failed!'));
+
+// const wait = function (seconds) {
+//   return new Promise(function (resolve) {
+//     setTimeout(resolve, seconds * 1000);
+//   });
+// };
+
+// wait(1)
+//   .then(() => {
+//     console.log('1 second passed');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('2 second passed');
+//     return wait(1);
+//   })
+//   .then(() => {
+//     console.log('3 second passed');
+//     return wait(1);
+//   })
+//   .then(() => console.log('4 second passed'));
+
+///////////////////////////////////////
+// Promisifying the Geolocation API
+// const getPosition = function () {
+//   return new Promise(function (resolve, reject) {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+// getPosition().then(pos => console.log(pos));
+
+// const getCountryData = async function (country) {
+//   try {
+//     const response = await fetch(`https://restcountries.com/v2/name/${country}`);
+//     if (!response.ok) throw new Error(`Country not found (${response.status})`);
+//     const responseJson = await response.json();
+//     renderCountry(responseJson[0]);
+//   } catch (e) {
+//     renderError(e);
+//   }
+// };
+
+// getCountryData('Pakistan');
+// getCountryData('usa');
 
 // const getCountryData = function (country) {
 //   // Country 1
