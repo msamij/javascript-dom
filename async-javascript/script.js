@@ -32,6 +32,41 @@ const getJSON = function (url, errorMsg = 'Something went wrong') {
   });
 };
 
+setTimeout(() => {
+  console.log('1 second passed');
+  setTimeout(() => {
+    console.log('2 second passed');
+    setTimeout(() => {
+      console.log('3 second passed');
+      setTimeout(() => {
+        console.log('4 second passed');
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
+
+const promiseTimeOut = function (seconds) {
+  return new Promise(resolve => setTimeout(resolve, seconds));
+};
+
+promiseTimeOut(1)
+  .then(() => {
+    console.log('1 second passed!');
+    return promiseTimeOut(1);
+  })
+  .then(() => {
+    console.log('2 second passed!');
+    return promiseTimeOut(1);
+  })
+  .then(() => {
+    console.log('3 second passed!');
+    return promiseTimeOut(1);
+  })
+  .then(() => {
+    console.log('4 second passed!');
+    return promiseTimeOut(1);
+  });
+
 ///////////////////////////////////////
 // Our First AJAX Call: XMLHttpRequest
 
